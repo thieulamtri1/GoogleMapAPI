@@ -8,7 +8,7 @@ class Location{
 }
 
 List<Location> locations = [
-  Location(name: "Gà Spa", position: Position(latitude: 10.792586195395378, longitude: 106.68616379757441)),
-  Location(name: "MTP", position: Position(latitude: 10.842027301414552, longitude: 106.80933062641029)),
-  Location(name: "30Shine", position: Position(latitude: 10.788441490138904, longitude: 106.69386201291704)),
+  Location(name: "CongVienLV8", position: Position(latitude: 10.787742498634124, longitude: 106.69222660532054)),
+  Location(name: "Fit24", position: Position(latitude: 10.788992586967384, longitude: 106.68322641418833)),
+  Location(name: "NgaTuPhuNhuan", position: Position(latitude: 10.799065970554844, longitude: 106.68018513545996)),
 ];

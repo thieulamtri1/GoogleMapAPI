@@ -14,8 +14,8 @@ class CaculateDistance extends StatefulWidget {
 
 
 class _CaculateDistanceState extends State<CaculateDistance> {
-  Position _currentPosition;
-  Position destinationCoordinates = Position(latitude: 10.792586195395378, longitude: 106.68616379757441);
+  Position _currentPosition ;//Position(latitude: 10.79256817537644, longitude: 106.68611383772756);
+  Position destinationCoordinates = Position(latitude: 10.795671651313667, longitude: 106.68205620725249);
   List<LatLng> polylineCoordinates = [];
   PolylinePoints polylinePoints;
   String _placeDistance;
@@ -26,18 +26,22 @@ class _CaculateDistanceState extends State<CaculateDistance> {
   @override
   void initState() {
     super.initState();
-    //get();
+    //getCurrentLocation();
+    //getDistance();
     getListAscending();
   }
 
 
+
+
   getCurrentLocation() async {
+
     await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high)
         .then((Position position) async {
       setState(() {
         _currentPosition = position;
         print('CURRENT POS: $_currentPosition');
-        print('Current Pos lat: ${position.latitude} và Log: ${position.longitude}');
+        print('Current lat: ${position.latitude} và Log: ${position.longitude}');
       });
     }).catchError((e) {
       print(e);
@@ -72,7 +76,7 @@ class _CaculateDistanceState extends State<CaculateDistance> {
       );
     }
     _placeDistance = totalDistance.toStringAsFixed(2);
-    //print('DISTANCE Nè: $_placeDistance km');
+    print('DISTANCE Nè: $_placeDistance km');
 
   }
 
@@ -87,7 +91,7 @@ class _CaculateDistanceState extends State<CaculateDistance> {
 
 
 
-  get() async{
+  getDistance() async{
     await getCurrentLocation();
     await createPolylines(_currentPosition, destinationCoordinates);
     await caculateDistance();
@@ -103,6 +107,18 @@ class _CaculateDistanceState extends State<CaculateDistance> {
       double b = double.parse(_placeDistance);
       distanceAscending.add(b);
     }
+
+    double temp;
+    for(int i = 0; i < distanceAscending.length - 1; i++){
+      for(int j = i+1; j < distanceAscending.length; j++){
+        if(distanceAscending[i] > distanceAscending[j]){
+          temp = distanceAscending[i];
+          distanceAscending[i] = distanceAscending[j];
+          distanceAscending[j] = temp;
+        }
+      }
+    }
+
     print("List Ascending: ${distanceAscending}");
   }
 
@@ -110,9 +126,13 @@ class _CaculateDistanceState extends State<CaculateDistance> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-
-      ),
+      appBar: AppBar(),
+      body: Column(
+        children: [
+          Text("Lat: "),
+          Text("Long: ")
+        ],
+      )
     );
   }
 }
