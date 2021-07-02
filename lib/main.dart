@@ -462,35 +462,14 @@ class _MapViewState extends State<MapView> {
                           ),
                           SizedBox(height: 5),
                           RaisedButton(
-                            onPressed: (_startAddress != '' && _destinationAddress != '')
-                                ? () async {
-                              startAddressFocusNode.unfocus();
-                              desrinationAddressFocusNode.unfocus();
-                              setState(() {
-                                if (markers.isNotEmpty) markers.clear();
-                                if (polylines.isNotEmpty) polylines.clear();
-                                if (polylineCoordinates.isNotEmpty)
-                                  polylineCoordinates.clear();
-                                _placeDistance = null;
-                              });
-
-                              _calculateDistance().then((isCalculated) {
-                                if (isCalculated) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text('Distance Calculated Sucessfully'),
-                                    ),
-                                  );
-                                } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text('Error Calculating Distance'),
-                                    ),
-                                  );
-                                }
-                              });
-                            }
-                                : null,
+                            onPressed: (){
+                              Position
+                              _currentPosition = Position(latitude: 10.79256817537644, longitude: 106.68611383772756);
+                              Position destinationCoordinates =
+                              Position(latitude: 10.795671651313667, longitude: 106.68205620725249);
+                              _createPolylines(_currentPosition, destinationCoordinates);
+                              _calculateDistance();
+                            },
                             color: Colors.red,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20.0),

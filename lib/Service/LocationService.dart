@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 
 
 class LocationService {
-  static const String url = "https://swp490spa.herokuapp.com/api/public/getallspa";
+  static const String url = "https://swp490spa.herokuapp.com/api/public/spa/findall";
 
   static Future<LocationReal> getLocation() async {
     try {

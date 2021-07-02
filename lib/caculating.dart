@@ -22,6 +22,7 @@ class _CaculateDistanceState extends State<CaculateDistance> {
   Position destinationCoordinates =
       Position(latitude: 10.795671651313667, longitude: 106.68205620725249);
   List<LatLng> polylineCoordinates = [];
+
   PolylinePoints polylinePoints;
   String _placeDistance;
   List<Location> distanceAscending = [];
@@ -33,9 +34,9 @@ class _CaculateDistanceState extends State<CaculateDistance> {
   void initState() {
     super.initState();
     //getCurrentLocation();
-    //getDistance();
+    getDistance();
     //getListAscending();
-    getData();
+    //getData();
   }
 
   getData() async {
@@ -44,9 +45,9 @@ class _CaculateDistanceState extends State<CaculateDistance> {
             locationReal = value;
           }),
         });
-    print("Location: ${locationReal.data[0].name}");
-    print("Location: ${locationReal.data[0].latitude}");
-    print("Location: ${locationReal.data[0].longtitude}");
+    print("Tên Spa: ${locationReal.data[0].name}");
+    print("Lat: ${locationReal.data[0].latitude}");
+    print("Long: ${locationReal.data[0].longtitude}");
   }
 
   getCurrentLocation() async {
@@ -66,14 +67,18 @@ class _CaculateDistanceState extends State<CaculateDistance> {
   }
 
   createPolylines(Position start, Position destination) async {
-    polylineCoordinates = [];
+    print("Start: " + start.toString());
+    print("End: " + destination.toString());
+
+    //polylineCoordinates = [];
     polylinePoints = PolylinePoints();
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-      Secrets.API_KEY,
+      Secrets.API_KEY, // Google Maps API Key
       PointLatLng(start.latitude, start.longitude),
       PointLatLng(destination.latitude, destination.longitude),
-      travelMode: TravelMode.transit,
+      travelMode: TravelMode.driving,
     );
+    print(result);
 
     if (result.points.isNotEmpty) {
       result.points.forEach((PointLatLng point) {
