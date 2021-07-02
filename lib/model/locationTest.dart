@@ -3,8 +3,9 @@ import 'package:geolocator/geolocator.dart';
 class Location{
   String name;
   Position position;
+  double distance;
 
-  Location({this.name, this.position});
+  Location({this.name, this.position, this.distance});
 }
 
 List<Location> locations = [
@@ -12,3 +13,4 @@ List<Location> locations = [
   Location(name: "Fit24", position: Position(latitude: 10.788992586967384, longitude: 106.68322641418833)),
   Location(name: "NgaTuPhuNhuan", position: Position(latitude: 10.799065970554844, longitude: 106.68018513545996)),
 ];
+
